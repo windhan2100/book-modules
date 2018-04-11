@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.core.mapper.TestOrderMapper">
+  <resultMap id="BaseResultMap" type="com.book.core.model.TestOrder">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="real_pay" jdbcType="DOUBLE" property="realPay" />
+    <result column="purchase_type" jdbcType="TINYINT" property="purchaseType" />
+    <result column="pay_way" jdbcType="TINYINT" property="payWay" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="peak_id" jdbcType="VARCHAR" property="peakId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="plat" jdbcType="TINYINT" property="plat" />
+    <result column="drama_id" jdbcType="BIGINT" property="dramaId" />
+    <result column="play_id" jdbcType="BIGINT" property="playId" />
+    <result column="live_date" jdbcType="VARCHAR" property="liveDate" />
+    <result column="live_time" jdbcType="VARCHAR" property="liveTime" />
+    <result column="period" jdbcType="VARCHAR" property="period" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="upgrade" jdbcType="TINYINT" property="upgrade" />
+    <result column="upgrade_order_id" jdbcType="BIGINT" property="upgradeOrderId" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, create_time, product_id, real_pay, purchase_type, pay_way, nick_name, open_id, 
+    mobile, status, peak_id, user_id, update_time, product_name, order_no, plat, drama_id, 
+    play_id, live_date, live_time, period, cover, upgrade, upgrade_order_id, price
+  </sql>
+  <select id="selectByExample" parameterType="com.book.core.model.TestOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.book.core.model.TestOrderExample">
+    delete from test_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.book.core.model.TestOrder">
+    insert into test_order (id, create_time, product_id, 
+      real_pay, purchase_type, pay_way, 
+      nick_name, open_id, mobile, 
+      status, peak_id, user_id, 
+      update_time, product_name, order_no, 
+      plat, drama_id, play_id, 
+      live_date, live_time, period, 
+      cover, upgrade, upgrade_order_id, 
+      price)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{productId,jdbcType=BIGINT}, 
+      #{realPay,jdbcType=DOUBLE}, #{purchaseType,jdbcType=TINYINT}, #{payWay,jdbcType=TINYINT}, 
+      #{nickName,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{peakId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{productName,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{plat,jdbcType=TINYINT}, #{dramaId,jdbcType=BIGINT}, #{playId,jdbcType=BIGINT}, 
+      #{liveDate,jdbcType=VARCHAR}, #{liveTime,jdbcType=VARCHAR}, #{period,jdbcType=VARCHAR}, 
+      #{cover,jdbcType=VARCHAR}, #{upgrade,jdbcType=TINYINT}, #{upgradeOrderId,jdbcType=BIGINT}, 
+      #{price,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.book.core.model.TestOrder">
+    insert into test_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="realPay != null">
+        real_pay,
+      </if>
+      <if test="purchaseType != null">
+        purchase_type,
+      </if>
+      <if test="payWay != null">
+        pay_way,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="peakId != null">
+        peak_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="plat != null">
+        plat,
+      </if>
+      <if test="dramaId != null">
+        drama_id,
+      </if>
+      <if test="playId != null">
+        play_id,
+      </if>
+      <if test="liveDate != null">
+        live_date,
+      </if>
+      <if test="liveTime != null">
+        live_time,
+      </if>
+      <if test="period != null">
+        period,
+      </if>
+      <if test="cover != null">
+        cover,
+      </if>
+      <if test="upgrade != null">
+        upgrade,
+      </if>
+      <if test="upgradeOrderId != null">
+        upgrade_order_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="realPay != null">
+        #{realPay,jdbcType=DOUBLE},
+      </if>
+      <if test="purchaseType != null">
+        #{purchaseType,jdbcType=TINYINT},
+      </if>
+      <if test="payWay != null">
+        #{payWay,jdbcType=TINYINT},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="peakId != null">
+        #{peakId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="plat != null">
+        #{plat,jdbcType=TINYINT},
+      </if>
+      <if test="dramaId != null">
+        #{dramaId,jdbcType=BIGINT},
+      </if>
+      <if test="playId != null">
+        #{playId,jdbcType=BIGINT},
+      </if>
+      <if test="liveDate != null">
+        #{liveDate,jdbcType=VARCHAR},
+      </if>
+      <if test="liveTime != null">
+        #{liveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="upgrade != null">
+        #{upgrade,jdbcType=TINYINT},
+      </if>
+      <if test="upgradeOrderId != null">
+        #{upgradeOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.book.core.model.TestOrderExample" resultType="java.lang.Long">
+    select count(*) from test_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=BIGINT},
+      </if>
+      <if test="record.realPay != null">
+        real_pay = #{record.realPay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.purchaseType != null">
+        purchase_type = #{record.purchaseType,jdbcType=TINYINT},
+      </if>
+      <if test="record.payWay != null">
+        pay_way = #{record.payWay,jdbcType=TINYINT},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null">
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.peakId != null">
+        peak_id = #{record.peakId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plat != null">
+        plat = #{record.plat,jdbcType=TINYINT},
+      </if>
+      <if test="record.dramaId != null">
+        drama_id = #{record.dramaId,jdbcType=BIGINT},
+      </if>
+      <if test="record.playId != null">
+        play_id = #{record.playId,jdbcType=BIGINT},
+      </if>
+      <if test="record.liveDate != null">
+        live_date = #{record.liveDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liveTime != null">
+        live_time = #{record.liveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.period != null">
+        period = #{record.period,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cover != null">
+        cover = #{record.cover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upgrade != null">
+        upgrade = #{record.upgrade,jdbcType=TINYINT},
+      </if>
+      <if test="record.upgradeOrderId != null">
+        upgrade_order_id = #{record.upgradeOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_order
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      product_id = #{record.productId,jdbcType=BIGINT},
+      real_pay = #{record.realPay,jdbcType=DOUBLE},
+      purchase_type = #{record.purchaseType,jdbcType=TINYINT},
+      pay_way = #{record.payWay,jdbcType=TINYINT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      peak_id = #{record.peakId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      plat = #{record.plat,jdbcType=TINYINT},
+      drama_id = #{record.dramaId,jdbcType=BIGINT},
+      play_id = #{record.playId,jdbcType=BIGINT},
+      live_date = #{record.liveDate,jdbcType=VARCHAR},
+      live_time = #{record.liveTime,jdbcType=VARCHAR},
+      period = #{record.period,jdbcType=VARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      upgrade = #{record.upgrade,jdbcType=TINYINT},
+      upgrade_order_id = #{record.upgradeOrderId,jdbcType=BIGINT},
+      price = #{record.price,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

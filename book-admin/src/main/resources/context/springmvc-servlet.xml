@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xsi:schemaLocation=" 
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+        http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	
+	<!-- 指定一个包让其自动扫描:开启controller注解支持 -->
+	<!-- 注意:如果base-package=com.book则注解事务会不起作用！ -->
+	<context:component-scan base-package="com.book.admin.controller">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>  
+	</context:component-scan>
+
+	<mvc:annotation-driven/>
+	
+	<!-- 下面注释的部分表示：强调所有的请求都要经过springmvc框架 -->
+    <mvc:default-servlet-handler/>
+	
+	<!-- 放行了以/static/开始的请求 -->
+	<mvc:resources location="/static/" mapping="/static/**"/> 
+	
+	<!-- 当一个方法完全是为了跳转时，我们可以省略该方法，而在此写一个配置就行了
+	<mvc:view-controller path="/index" view-name="index"/>
+	<mvc:view-controller path="/main" view-name="main"/>
+	<mvc:view-controller path="/success" view-name="success"/> 
+	<mvc:view-controller path="/index" view-name="main"/>
+	<mvc:view-controller path="/" view-name="main"/> 
+	<mvc:view-controller path="/admin/myinfo" view-name="myinfo"/>-->
+	<!-- 
+	<mvc:view-controller path="/book" view-name="book"/>
+	 -->
+	<mvc:view-controller path="/" view-name="main"/> 
+	
+	<mvc:interceptors>
+		<bean class="com.book.admin.interceptor.LoginInterceptor"></bean>
+		<bean class="com.book.admin.interceptor.FunctionsInterceptor"></bean>
+		<!--  
+		<mvc:interceptor>  
+	        <mvc:mapping path="/test/number.do"/>  
+	        <bean class="com.host.app.web.interceptor.LoginInterceptor"/>  
+	    </mvc:interceptor>  
+	    -->
+	</mvc:interceptors>
+	
+	<!-- 配置springmvc的视图解析器 -->
+	<bean id="viewResolver" 
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="suffix" value=".jsp"/>
+		<property name="prefix" value="/WEB-INF/views/"/>
+	</bean>
+	
+	<!-- 文件上传解析器   -->
+	<bean id="multipartResolver" 
+	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+	    <property name="maxUploadSize" value="100000"/> 
+	</bean>
+</beans>

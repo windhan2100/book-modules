@@ -1,0 +1,267 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.book</groupId>
+    <artifactId>book-modules</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>book-web</artifactId>
+  <packaging>war</packaging>
+  
+  <dependencies>
+ 		<!-- ehcache -->
+		<dependency>
+		    <groupId>net.sf.ehcache</groupId>
+		    <artifactId>ehcache-core</artifactId>
+		</dependency>
+  
+	    <dependency>
+		  <groupId>javax.servlet</groupId>
+		  <artifactId>javax.servlet-api</artifactId>
+		  <!-- <version>3.1.0</version> 此处不需要设置版本号，因为在book-modules/pom.xml中已经确定了！-->
+		</dependency>
+		
+	    <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		</dependency>
+		
+		<!-- book -->
+		<dependency>
+			<groupId>com.book</groupId>
+			<artifactId>book-service</artifactId>
+		</dependency>
+		<!-- log4j1测试使用,随后注释掉 
+		<dependency>
+		  <groupId>log4j</groupId>
+		  <artifactId>log4j</artifactId>
+		  <version>1.2.9</version>
+		</dependency>-->
+		
+		<!-- log4j2的测试使用,随后注释掉 -->
+		<dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-api</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-core</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-web</artifactId>
+		</dependency>
+		<!-- log4j2与slf4j集成 -->
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+		<!-- hystrix -->
+		<dependency>
+		    <groupId>com.netflix.hystrix</groupId>
+		    <artifactId>hystrix-core</artifactId>
+		</dependency>
+		
+	   <!-- fastjson -->
+	   <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+		
+		<!-- logback测试使用,随后注释掉 
+		<dependency>
+		  <groupId>ch.qos.logback</groupId>
+		  <artifactId>logback-core</artifactId>
+		  <version>1.2.3</version>
+		</dependency>
+		<dependency>
+		  <groupId>ch.qos.logback</groupId>
+		  <artifactId>logback-classic</artifactId>
+		  <version>1.2.3</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-api</artifactId>
+		  <version>1.7.7</version>
+		</dependency>-->
+		
+		<!-- 测试commons-logging 
+		<dependency>
+		  <groupId>commons-logging</groupId>
+		  <artifactId>commons-logging</artifactId>
+		  <version>1.2</version>
+		</dependency>	-->	
+		
+		<!-- 测试log4j2与commons-logging集成 
+		<dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-jcl</artifactId>
+		  <version>2.2</version>
+		</dependency>-->
+		
+		<!-- 测试logback和commons-logging集成 
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>jcl-over-slf4j</artifactId>
+		  <version>1.7.7</version>
+		</dependency>-->
+		
+		<!-- log4j1与slf4j集成需要 
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-log4j12</artifactId>
+		  <version>1.7.7</version>
+		</dependency>
+		-->
+	</dependencies>  
+
+	<!-- 插件管理开始 -->
+    <build>
+       <resources>
+    		<resource>
+    			<!-- 描述存放资源的目录，该路径相对POM路径 -->
+    			<directory>src/main/resources</directory>
+    			<!-- 对该目录下的配置build时启用filter 过滤替换:一般我们配置了profiles属性，要配置该属性！-->
+    			<filtering>true</filtering>  
+    		</resource>
+    	</resources>
+		<plugins>
+		     <!-- complier插件，设定JDK版本:设置源文件编码方式 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration> 
+	                    <source>${jdk.version}</source> 
+	                    <target>${jdk.version}</target> 
+	                    <encoding>${encoding}</encoding>
+               	    </configuration>
+                </plugin>
+			 <!-- dependency相关插件：处理与依赖相关的插件(拷贝依赖的jar包到lib目录) -->
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-dependency-plugin</artifactId>
+                 <configuration>
+                     <overWriteReleases>true</overWriteReleases>
+                     <overWriteSnapshots>true</overWriteSnapshots>
+                 </configuration>
+             </plugin>
+			<!-- 此插件用于执行配置文件替换 -->
+			<plugin>
+				<groupId>com.juvenxu.portable-config-maven-plugin</groupId>
+				<artifactId>portable-config-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>replace-package</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+            <!-- 源码自动打包并发布 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                        <inherited>false</inherited>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+	</build>
+	<!-- 插件管理结束 -->
+	
+	<!-- 文件配置管理开始 -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<db.url>10.10.88.144:3307/test</db.url>
+				<db.username>baby</db.username>
+				<db.password>5fdDE4#dtest135H</db.password>
+				<!-- 
+				<db.url>127.0.0.1:3306/book</db.url>
+				<db.username>root</db.username>
+				<db.password>root</db.password>
+				 -->
+			</properties>
+		</profile>
+		<profile>
+			<id>release</id>
+			<properties>
+				<db.url>10.10.88.144:3307/test</db.url>
+				<db.username>baby</db.username>
+				<db.password>5fdDE4#dtest135H</db.password>
+			</properties>
+		</profile>
+	</profiles>
+	<!-- 文件配置管理结束 -->	
+
+</project>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<Configuration status="warn" monitorInterval="30">  
+	<Properties>
+		<Property name="log.pattern">
+		[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5p] [%t] %C{50} (%F:%L) - 
+				%m%n
+		<!--
+		 %date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n-->
+		</Property>
+	</Properties>
+
+  <Appenders>  
+  	<!-- 控制台 -->
+    <Console name="Console" target="SYSTEM_OUT" >  
+      <ThresholdFilter level="debug"/> 
+       <PatternLayout pattern="${log.pattern}"/>
+      <!-- 本地测试可以用这个 
+      <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+      --> 
+      <!-- 
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] [%-5level] %class{36} %L %M - %msg%n"/>  
+       -->
+      <!--
+          %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间
+          %p : 日志输出格式
+          %c : logger的名称
+          %m : 日志内容，即 logger.info("message")
+          %n : 换行符
+          %C : Java类名
+          %L : 日志输出所在行数
+          %M : 日志输出所在方法名
+          hostName : 本地机器名
+          hostAddress : 本地ip地址
+       -->
+    </Console>  
+    
+    <!-- 文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用  
+    	append为TRUE表示消息增加到指定文件中，false表示消息覆盖指定的文件内容，默认值是true -->
+    <File name="log" fileName="./logs/test.log" append="false">  
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>  
+    </File>
+    
+    <!-- 打印所有的日志到stdout.log文件 -->
+    <RollingFile name="Stdout" fileName="./logs/stdout.log"  
+                 filePattern="./logs/stdout.log.%d{yyyy-MM-dd}">  
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} %L %M - %msg%xEx%n"/>  
+      <Policies>
+      <!-- 基于时间的滚动策略，interval属性用来指定多久滚动一次，默认是1 hour。
+      	    modulate=true用来调整时间：比如现在是早上3am，interval是4，
+      	    那么第一次滚动是在4am，接着是8am，12am...而不是7am. 
+      -->
+        <!-- 时间触发，一天一个日志 -->
+        <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+        <!-- 大小触发，达到50M的时候进行分割 -%i
+        <SizeBasedTriggeringPolicy size="1MB" />  -->
+      </Policies>
+      <!-- 用来指定同一个文件夹下最多有几个日志文件时开始删除最旧的 -->
+      <!-- DefaultRolloverStrategy属性如不设置，
+      	         则默认为最多同一文件夹下7个文件，这里设置了20 -->
+      <DefaultRolloverStrategy max="30" />
+    </RollingFile>
+    
+    <!-- 只打印error以及以上级别的日志到stderr.log -->
+    <RollingFile name="Error" fileName="./logs/stderr.log"  
+                 filePattern="./logs/stderr.log.%d{yyyy-MM-dd}">
+      <!--  控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+      <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>  
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} %L %M - %msg%xEx%n"/>  
+      <Policies>
+        <!-- 时间触发，一天一个日志 -->
+        <TimeBasedTriggeringPolicy interval="24" modulate="true"/>
+        <!-- 大小触发，达到50M的时候进行分割   -%i
+        <SizeBasedTriggeringPolicy size="50 MB" />  -->
+      </Policies>
+      <!-- 用来指定同一个文件夹下最多有几个日志文件时开始删除最旧的 -->
+      <DefaultRolloverStrategy max="30" />  
+    </RollingFile>
+    
+  </Appenders>  
+  <Loggers> 
+  	<!--过滤掉spring和mybatis的一些无用的DEBUG信息--> 
+    <Logger name="org.mybatis" level="INFO"></Logger>
+    <Logger name="org.springframework" level="INFO"></Logger>
+    
+    <Root level="Info">  
+      <Appender-ref ref="Stdout"/>  
+      <Appender-ref ref="Console"/>  
+      <Appender-ref ref="Error"/>
+      
+      <!-- just for test temp 
+      <Appender-ref ref="log"/>-->
+    </Root>  
+  </Loggers>  
+</Configuration> 
