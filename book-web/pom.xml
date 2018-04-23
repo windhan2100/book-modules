@@ -246,11 +246,6 @@
 				<db.url>10.10.88.144:3307/test</db.url>
 				<db.username>baby</db.username>
 				<db.password>5fdDE4#dtest135H</db.password>
-				<!-- 
-				<db.url>127.0.0.1:3306/book</db.url>
-				<db.username>root</db.username>
-				<db.password>root</db.password>
-				 -->
 			</properties>
 		</profile>
 		<profile>
