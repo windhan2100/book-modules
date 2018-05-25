@@ -345,14 +345,12 @@ public class DateUtil {
 			t1 = timeformat.parse(getTimeStampNumberFormat(endTime)).getTime();
 		}
 		catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			t2 = timeformat.parse(getTimeStampNumberFormat(startTime)).getTime();
 		}
 		catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// 因为t1-t2得到的是毫秒级,所以要初3600000得出小时.算天数或秒同理

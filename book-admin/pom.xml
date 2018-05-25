@@ -259,6 +259,21 @@
 						</execution>
 					</executions>
 				</plugin>
+
+                <!-- jetty插件开始 -->
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>9.4.4.v20170414</version>
+                    <configuration>
+                        <scanIntervalSeconds>5</scanIntervalSeconds>
+                        <webApp>
+                            <contextPath>/</contextPath>
+                        </webApp>
+                    </configuration>
+                </plugin>
+                <!-- jetty插件结束 -->
+
   		</plugins>
   	</build>
   	<!-- 插件配置结束 -->

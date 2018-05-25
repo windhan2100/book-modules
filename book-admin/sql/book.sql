@@ -100,6 +100,19 @@ CREATE TABLE `orders` (
   `back_up` VARCHAR(1024) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '备注信息:比如用户取消的原因等',
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `admin_right`;
+CREATE TABLE `admin_right` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key',
+  `name` varchar(20) DEFAULT '' COMMENT '用户名(和user表中的name一样)',
+  `rights` varchar(255) DEFAULT '' COMMENT '用户拥有的权限列表，用,分割',
+  `is_admin` tinyint(4) DEFAULT 0 COMMENT '是否超级管理员，0：不是；1：超管',
+  `create_time` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '记录添加时间',
+  `creator_name` varchar(50) DEFAULT '' COMMENT '添加者',
+  `chinese_name` varchar(20) DEFAULT '' COMMENT '中文名字,便于阅读',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 INSERT  INTO `admin_right`(`id`,`name`,`rights`,`is_admin`,`create_time`,`creator_name`,`chinese_name`) VALUES (55,'admin','1,2,3,',1,'2017-08-24 14:26:14','admin','韩超');
 
 /*************************/
