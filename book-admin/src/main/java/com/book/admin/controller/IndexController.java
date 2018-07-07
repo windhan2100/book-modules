@@ -27,5 +27,9 @@ public class IndexController extends BaseController {
 	public String index(HttpServletRequest request,HttpServletResponse response) {
 		return getReturnStr(request, "main");
 	}
-	
+
+	@RequestMapping(value = "/",method = {RequestMethod.GET,RequestMethod.POST})
+	public String index2(HttpServletRequest request,HttpServletResponse response) {
+		return getReturnStr(request, "main");
+	}
 }

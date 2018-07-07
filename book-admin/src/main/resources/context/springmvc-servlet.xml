@@ -34,9 +34,9 @@
 	<mvc:view-controller path="/admin/myinfo" view-name="myinfo"/>-->
 	<!-- 
 	<mvc:view-controller path="/book" view-name="book"/>
-	 -->
+
 	<mvc:view-controller path="/" view-name="main"/> 
-	
+	 -->
 	<mvc:interceptors>
 		<bean class="com.book.admin.interceptor.LoginInterceptor"></bean>
 		<bean class="com.book.admin.interceptor.FunctionsInterceptor"></bean>
